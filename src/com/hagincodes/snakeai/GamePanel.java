@@ -18,11 +18,11 @@ public class GamePanel extends JPanel implements Runnable {
     private Thread thread;
     private boolean running = false;
  
-    private BodyPart b;
-    private ArrayList<BodyPart> snake;
+    private Snake b;
+    private ArrayList<Snake> snake;
  
-    private Apple apple;
-    private ArrayList<Apple> apples;
+    private Food apple;
+    private ArrayList<Food> apples;
     
     private Random r;
     
@@ -36,15 +36,14 @@ public class GamePanel extends JPanel implements Runnable {
     private int ticks = 0;
     
     
-    
     public GamePanel() {
     	setFocusable(true);
     	
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
  
         r = new Random();
-        snake = new ArrayList<BodyPart>();
-        apples = new ArrayList<Apple>();
+        snake = new ArrayList<Snake>();
+        apples = new ArrayList<Food>();
         
         
         start();
@@ -56,7 +55,7 @@ public class GamePanel extends JPanel implements Runnable {
     	
 
         while(snake.size() < 5) {
-        	b = new BodyPart(xCoor, yCoor, 10);
+        	b = new Snake(xCoor, yCoor, 10);
         	snake.add(b);
         	xCoor++;
         } 
@@ -64,11 +63,9 @@ public class GamePanel extends JPanel implements Runnable {
         if(apples.size() == 0) {
         	 appleX = r.nextInt(49);
         	 appleY = r.nextInt(49);
-        	 
-        	 
-        	
-        	apple = new Apple(appleX, appleY, 10);
-        	apples.add(apple);
+	
+        	 apple = new Food(appleX, appleY, 10);
+        	 apples.add(apple);
         }
                 
         
@@ -200,7 +197,7 @@ public class GamePanel extends JPanel implements Runnable {
     
     
     public void addPart() {
-    	b = new BodyPart(xCoor, yCoor, 10);
+    	b = new Snake(xCoor, yCoor, 10);
         snake.add(b);
     }
     
