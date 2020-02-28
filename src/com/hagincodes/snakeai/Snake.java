@@ -98,21 +98,57 @@ public class Snake {
 			vel.x = 0;
 			vel.y = 1;
 		}
+	}
+	
+	//move the snake in the direction of vel Point
+	public void move() {
+		//move through time
 		
+		lifetime+= 1;
+		leftToLive -= 1;
 		
+		//if the time left to live is up then the snake will K.I.S lol
+		if (leftToLive < 0) {
+			alive = false;
+		}
+		
+		//if the snake hit the edge or itself, terminate life
+		if(gonnaDie(pos.x + vel.x, pos.y + vel.y)) {
+			alive = false;
+		}
+		
+		//if snake is on the food position we munch it up.
+		if(pos.x + vel.x == munchy.pos.x && pos.y + vel.y == munchy.pos.y) {
+			eat(); //yum yum
+		}
+	
+		
+		//snake grows 1 square at a time so if the snake has recently eaten the grow count will be greater than 0
+		if(growCount > 0) {
+			growCount --;
+			grow();
+		} else {
+			for(int i = 0; i < tailPositions.size() - 1; i++) {
+				temp = new Point(tailPositions.get(i+1).x, tailPositions.get(i+1).y);
+				tailPositions.set(i, temp);
+			}
+			temp = new Point(pos.x, pos.y);
+			tailPositions.set(len-2, temp);
+		}
+		
+		//make the head change position
+		pos.
 		
 	}
 	
 	
-	public void tick() {
-		
-	}
 	
 	
 	
-	public void draw(Graphics g) {
+	
+	public void show(Graphics g) {
 		g.setColor(Color.YELLOW);
-		g.fillRect(xCoor * width, yCoor * height, width, height);
+		g.fillRect(pos.x * 10, pos.y * 10, width, height);
 		
 	}
 	
