@@ -195,12 +195,13 @@ public class GamePanel extends JPanel implements Runnable {
 		return true;
 	}    
     
-    
+   /* 
     public void addPart() {
     	b = new Snake(xCoor, yCoor, 10);
         snake.add(b);
     }
-    
+    */ 
+	
     public void removeLastPart() {
 
 		if (snake.size() > size) {
@@ -228,10 +229,10 @@ public class GamePanel extends JPanel implements Runnable {
         }
  
         for (int i = 0; i < snake.size(); i++) {
-            snake.get(i).draw(g);
+            snake.get(i).show(g);
         }
         for(int i = 0; i < apples.size(); i++) {
-        	apples.get(i).draw(g);
+        	apples.get(i).show(g);
         }
 
     }
