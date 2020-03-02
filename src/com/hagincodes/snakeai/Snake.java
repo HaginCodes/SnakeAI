@@ -159,8 +159,8 @@ public class Snake extends Point{
 		leftToLive += 100;
 		
 		
-		//if we are testing then grow by 4 it if not the snake is still small grow +1
-		//this is for helping snake evolve so they don't get too big. 
+		// if we are testing then grow by 4 it if not the snake is still small grow +1
+		// this is for helping snake evolve so they don't get too big. 
 		if(test|| len>=10) {
 			growCount += 4;
 		} else {
@@ -177,6 +177,16 @@ public class Snake extends Point{
 		  
 		  return isOnTail(x,y);
 	}
+	
+	
+	public void grow() {
+		
+		temp = new Point(pos.x, pos.y);
+		tailPositions.add(temp);
+		len += 1;
+		
+	}
+	
 	
 	//returns true if the coordinates on the snakes tail
 	public boolean isOnTail(float x, float y) {
@@ -299,9 +309,9 @@ public class Snake extends Point{
 		    //set up a temp array to hold the values that are going to be passed to the main vision array
 		    float[] visionInDirection = new float[3];
 
-		    Point position = new Point(pos.x, pos.y);//the position where we are currently looking for food or tail or wall
-		    boolean foodIsFound = false;//true if the food has been located in the direction looked
-		    boolean tailIsFound = false;//true if the tail has been located in the direction looked 
+		    Point position = new Point(pos.x, pos.y); //the position where we are currently looking for food or tail or wall
+		    boolean foodIsFound = false; //true if the food has been located in the direction looked
+		    boolean tailIsFound = false; //true if the tail has been located in the direction looked 
 		    float distance = 0;
 		    //move once in the desired direction before starting 
 		    ((Snake) position).add(direction);
@@ -313,13 +323,13 @@ public class Snake extends Point{
 		      //check for food at the position
 		      if (!foodIsFound && position.x == munchy.pos.x && position.y == munchy.pos.y) {
 		        visionInDirection[0] = 1;
-		        foodIsFound = true; // dont check if food is already found
+		        foodIsFound = true; // don't check if food is already found
 		      }
 
 		      //check for tail at the position
 		      if (!tailIsFound && isOnTail(position.x, position.y)) {
 		        visionInDirection[1] = 1/distance;
-		        tailIsFound = true; // dont check if tail is already found
+		        tailIsFound = true; // don't check if tail is already found
 		      }
 
 		      //look further in the direction
@@ -329,7 +339,7 @@ public class Snake extends Point{
 
 		    //set the distance to the wall
 		    visionInDirection[2] = 1/distance;
-
+		    
 		    return visionInDirection;
 		  }
 		
